@@ -11,5 +11,6 @@ public class City
     public int CountryId { get; set; }
 
     [ForeignKey(nameof(CountryId))]
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual Country Country { get; set; }
 }

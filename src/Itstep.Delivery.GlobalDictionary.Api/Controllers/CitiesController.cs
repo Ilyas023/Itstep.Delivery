@@ -1,4 +1,5 @@
-﻿using Itstep.Delivery.GlobalDictionary.Api.Entities;
+﻿using Itstep.Delivery.GlobalDictionary.Api.Dtos;
+using Itstep.Delivery.GlobalDictionary.Api.Entities;
 using Itstep.Delivery.GlobalDictionary.Api.Persistance;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,5 +29,19 @@ public class CitiesController : ControllerBase
     {
         var cities = await _dbContext.Cities.FindAsync(id);
         return Ok(cities);
+    }
+
+    [HttpPost("create")]
+    public async Task<IActionResult> Create([FromBody]CityDto cityDto)
+    {
+        City city = new City
+        {
+            Name = cityDto.Name,
+            CountryId = cityDto.CountryId
+        };
+        await _dbContext.Cities.AddAsync(city);
+        await _dbContext.SaveChangesAsync();
+
+        return Created("Created", "to Database");
     }
 }
