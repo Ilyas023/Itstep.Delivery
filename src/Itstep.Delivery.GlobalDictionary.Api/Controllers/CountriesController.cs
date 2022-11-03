@@ -28,8 +28,8 @@ public class CountriesController : ControllerBase
     [HttpGet("retrieve-country-by-id/{id}")]
     public async Task<IActionResult> GetCountryById(int id)
     {
-        var cities = await _dbContext.Countries.FindAsync(id);
-        return Ok(cities);
+        var countries = await _dbContext.Countries.FindAsync(id);
+        return Ok(countries);
     }
 
     [HttpPost("create")]
